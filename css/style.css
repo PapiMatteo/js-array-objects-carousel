@@ -41,6 +41,7 @@ img {
 }
 
 .img-title {
+    display: none;
     color: white;
     position: absolute;
     bottom: 70px;
@@ -48,13 +49,14 @@ img {
 }
 
 .img-text {
+    display: none;
     color: white;
     position: absolute;
     bottom: 50px;
     right: 20px;
 }
 
-.item.active {
+.active {
     display: block;
 }
 
