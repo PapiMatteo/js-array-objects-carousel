@@ -22,29 +22,40 @@ const images = [
     }
 ];
 
-const imgElem = document.querySelector(".items");
-let innerStr  = "";
+const imgElem   = document.querySelector(".items");
+const thumbElem = document.querySelector(".thumb")
+let innerStr    = "";
+let thumbStr    = "";
 
 images.forEach((curImage) => {
     return innerStr += `
+            <div class = "item-group">
                 <img class="item" src= ${curImage.image} alt="">
-                <h3 class = "img-title">${curImage.title}</h3>
-                <p class = "img-text">${curImage.text}</p>
+                <div class = "item-text">
+                    <h3 class = "img-title">${curImage.title}</h3>
+                    <p class = "img-text">${curImage.text}</p>
+                </div> 
+            </div>
+                         
+    `
+})
+
+images.forEach((curThumb) => {
+    return thumbStr += `
+                    <img class="thumbs" src= ${curThumb.image} alt="">
     `
 })
 
 imgElem.innerHTML += innerStr
+thumbElem.innerHTML = thumbStr
 
-const itemElem   = document.querySelectorAll(".item");
-const titleElem  = document.querySelectorAll(".img-title");
-const textElem   = document.querySelectorAll(".img-text");
+const itemElem   = document.querySelectorAll(".item-group");
+const thumbsElem = document.querySelectorAll(".thumbs");
 let curItemIndex = 0;
-itemElem[curItemIndex].classList.add("active");
-titleElem[curItemIndex].classList.add("active");
-textElem[curItemIndex].classList.add("active");
+showImages();
 
-document.querySelector(".next").addEventListener("click", handleNextBtnClick)
-document.querySelector(".prev").addEventListener("click", handlePrevBtnClick)
+document.querySelector(".next").addEventListener("click", showNext);
+document.querySelector(".prev").addEventListener("click", showPrev);
 
 
 
@@ -52,44 +63,38 @@ document.querySelector(".prev").addEventListener("click", handlePrevBtnClick)
 /******************************/
 //FUNCTION
 
-function handleNextBtnClick(){
+function hideImages() {
+    itemElem[curItemIndex].classList.remove("active");
+    thumbsElem[curItemIndex].classList.remove("selected")
+}
+
+function showImages() {
+    itemElem[curItemIndex].classList.add("active");
+    thumbsElem[curItemIndex].classList.add("selected")
+}
+
+function showNext(){
     if(curItemIndex < itemElem.length - 1){
-        itemElem[curItemIndex].classList.remove("active");
-        titleElem[curItemIndex].classList.remove("active");
-        textElem[curItemIndex].classList.remove("active");
+        hideImages();
         curItemIndex++;
-        itemElem[curItemIndex].classList.add("active")
-        titleElem[curItemIndex].classList.add("active");
-        textElem[curItemIndex].classList.add("active");
+        showImages();
 
     } else if (curItemIndex === itemElem.length - 1){
-        itemElem[curItemIndex].classList.remove("active");
-        titleElem[curItemIndex].classList.remove("active");
-        textElem[curItemIndex].classList.remove("active");
+        hideImages();
         curItemIndex = 0;
-        itemElem[curItemIndex].classList.add("active")
-        titleElem[curItemIndex].classList.add("active");
-        textElem[curItemIndex].classList.add("active");
+        showImages();
     }
 }
 
-function handlePrevBtnClick(){
+function showPrev(){
     if(curItemIndex > 0){
-        itemElem[curItemIndex].classList.remove("active");
-        titleElem[curItemIndex].classList.remove("active");
-        textElem[curItemIndex].classList.remove("active");
+        hideImages();
         curItemIndex--;
-        itemElem[curItemIndex].classList.add("active")
-        titleElem[curItemIndex].classList.add("active");
-        textElem[curItemIndex].classList.add("active");
+        showImages();
 
     } else if (curItemIndex === 0){
-        itemElem[curItemIndex].classList.remove("active");
-        titleElem[curItemIndex].classList.remove("active");
-        textElem[curItemIndex].classList.remove("active");
+        hideImages();
         curItemIndex = itemElem.length - 1;
-        itemElem[curItemIndex].classList.add("active")
-        titleElem[curItemIndex].classList.add("active");
-        textElem[curItemIndex].classList.add("active");
+        showImages();
     }
 }

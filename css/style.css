@@ -21,6 +21,11 @@ img {
     display: flex;
 }
 
+.item-group{
+    display: none;
+    height: 300px;
+}
+
 .items {
     position: relative;
     width: 90%;
@@ -30,18 +35,17 @@ img {
 
 .item {
     height: 100%;
-    display: none;
+    /* display: none; */
     position: relative;
     object-fit: cover;
 }
 
-.item img {
+.item-group img {
     width: 100%;
     height: 100%;
 }
 
 .img-title {
-    display: none;
     color: white;
     position: absolute;
     bottom: 70px;
@@ -49,7 +53,6 @@ img {
 }
 
 .img-text {
-    display: none;
     color: white;
     position: absolute;
     bottom: 50px;
@@ -68,7 +71,6 @@ img {
 
 .thumb {
     height: calc((300px) / 5);
-    opacity: 0.5;
 }
 
 .thumb img {
@@ -78,9 +80,13 @@ img {
     object-fit: cover;
 }
 
-.thumb.active {
-    border: 2px solid #ccc;
-    opacity: 1;
+.thumbs {
+    opacity: 30%;
+}
+
+.selected {
+    border: 3px solid lightblue;
+    opacity: 100%;
 }
 
 .prev, .next {
